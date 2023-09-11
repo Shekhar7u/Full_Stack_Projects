@@ -1,4 +1,4 @@
-
+import Checkout from './Checkout'
 import Header from "./Header";
 import Home from "./Home";
 import "./css/App.css";
@@ -8,13 +8,12 @@ function App() {
   return (
     <Router>
       <div className="app">
+            <Header/>
         <Switch>
         <Route exact path="/checkout">
-            <Header/>
-            <h1>ahdsgyug</h1>
+            <Checkout />
           </Route>
           <Route path="/">
-            <Header/>
             <Home/>
           </Route>
         </Switch>
