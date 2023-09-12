@@ -1,7 +1,25 @@
+import { useStateValue } from './StateProvider'
 import './css/Product.css'
 
 // eslint-disable-next-line react/prop-types
-function Product({ title, image, price, rating }) {
+function Product({ id,title, image, price, rating }) {
+const[{cart},dispatch]=useStateValue()
+
+console.log("this is the cart >>>",cart)
+
+    const addToCart=()=>{
+//dispatch the item into the data layer
+dispatch({
+    type:'Add_To_Cart',
+    item:{
+        id:id,
+        title: title,
+        image: image,
+        price: price,
+        rating: rating,
+    },
+})
+    }
     return (
         <div className="product">
             <div className="product_info">
@@ -18,7 +36,7 @@ function Product({ title, image, price, rating }) {
                 </div>
             </div>
             <img src={image} alt="" />
-            <button>Add to Cart</button>
+            <button onClick={addToCart}>Add to Cart</button>
         </div>
     )
 }

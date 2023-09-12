@@ -1,8 +1,11 @@
 import "./css/Header.css";
 import { AiOutlineSearch, AiOutlineShopping } from "react-icons/ai";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import { useStateValue } from "./StateProvider";
 
 function Header() {
+const [{cart},dispatch]=useStateValue()
+
   return (
     <div className="header">
       <Link to="/">
@@ -40,7 +43,7 @@ function Header() {
           <div className="header_optionBasket">
             {/** basketlogo */}
             <AiOutlineShopping />
-            <span className="header_optionLineTwo header_basketCount">0</span>
+            <span className="header_optionLineTwo header_basketCount">{cart?.length}</span>
           </div>
         </Link>
       </div>
