@@ -4,7 +4,7 @@ import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import { useStateValue } from "./StateProvider";
 
 function Header() {
-const [{cart},dispatch]=useStateValue()
+  const [{ cart }, dispatch] = useStateValue();
 
   return (
     <div className="header">
@@ -24,10 +24,12 @@ const [{cart},dispatch]=useStateValue()
       </div>
 
       <div className="header_nav">
-        <div className="header_option">
-          <span className="header_optionLineOne">Hello Guest</span>
-          <span className="header_optionLineTwo">Sign In</span>
-        </div>
+        <Link to='/login'>
+          <div className="header_option">
+            <span className="header_optionLineOne">Hello Guest</span>
+            <span className="header_optionLineTwo">Sign In</span>
+          </div>
+        </Link>
         <div className="header_option">
           {" "}
           <span className="header_optionLineOne">Returns</span>
@@ -39,11 +41,13 @@ const [{cart},dispatch]=useStateValue()
           <span className="header_optionLineTwo">Prime</span>
         </div>
 
-        <Link to='/checkout'>
+        <Link to="/checkout">
           <div className="header_optionBasket">
             {/** basketlogo */}
             <AiOutlineShopping />
-            <span className="header_optionLineTwo header_basketCount">{cart?.length}</span>
+            <span className="header_optionLineTwo header_basketCount">
+              {cart?.length}
+            </span>
           </div>
         </Link>
       </div>
