@@ -1,34 +1,35 @@
-import { Link,useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useState } from "react";
 import "./css/Login.css";
-import { auth } from "./fireBase";
+import { auth } from "./fireBase.jsx";
 
 function Login() {
-  const history=useHistory()
+  const history = useHistory();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const signIn = (e) => {
     e.preventDefault();
     auth
-    .signInWithEmailAndPassword(email, password)
-    .then(auth => {
-      history.push('/')
-    })
-    .catch(err => alert(err.message))
+      .signInWithEmailAndPassword(email, password)
+      .then((auth) => {
+        history.push("/");
+      })
+      .catch((err) => alert(err.message));
   };
 
   const register = (e) => {
     e.preventDefault();
-    auth.createUserWithEmailAndPassword(email, password)
-    .then((auth) => {
-      //Successfully created user with email and password
-      console.log(auth)
-      if(auth){
-        history.push('/')
-      }
-    })
-    .catch((err) => alert(err.message))
+    auth
+      .createUserWithEmailAndPassword(email, password)
+      .then((auth) => {
+        //Successfully created user with email and password
+        console.log(auth);
+        if (auth) {
+          history.push("/");
+        }
+      })
+      .catch((err) => alert(err.message));
   };
   return (
     <div className="login">
