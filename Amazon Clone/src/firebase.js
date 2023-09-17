@@ -2,7 +2,7 @@
 import { initializeApp } from 'firebase/app'
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth'
 const firebaseApp = initializeApp({
-    apiKey: "AIzaSyDSLDLC8AZ7acGGqcS-Vyvz41bm4FP5_zM",
+    apiKey: "AIzaSyBHH38ptiwJ20iT_Ndk_mIEtpE7UK4sXz4",
     authDomain: "clone-e95b5.firebaseapp.com",
     projectId: "clone-e95b5",
     storageBucket: "clone-e95b5.appspot.com",
