@@ -7,9 +7,9 @@ function CheckoutProduct({ id, image, title, price, rating }) {
   const removeFromCart = () => {
     //remove item from cart
     dispatch({
-        type:'Remove_From_Cart',
-        id: id,
-    })
+      type: "Remove_From_Cart",
+      id: id,
+    });
   };
   return (
     <div className="checkoutProduct">
