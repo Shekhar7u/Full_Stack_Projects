@@ -6,6 +6,7 @@ import { useStateValue } from "./StateProvider";
 import CheckoutProduct from "./CheckoutProduct.jsx";
 
 function Checkout() {
+  // eslint-disable-next-line no-unused-vars
   const [{ cart, user }, dispatch] = useStateValue();
   return (
     <div className="checkout">
@@ -21,6 +22,7 @@ function Checkout() {
           <h3>Your Shopping Cart</h3>
           {/**checkout products */}
           {cart.map((item) => (
+            // eslint-disable-next-line react/jsx-key
             <CheckoutProduct
               id={item.id}
               title={item.title}
