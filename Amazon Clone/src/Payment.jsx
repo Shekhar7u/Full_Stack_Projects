@@ -1,15 +1,17 @@
-import  { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "./css/Payment.css";
 import { useStateValue } from "./StateProvider";
 import CheckoutProduct from "./CheckoutProduct";
-import { Link,useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
-import axios from './Axios'
+import axios from "./Axios";
 import { getCartTotal } from "./Reducer";
+import { db } from "./firebase.js";
+import { collection, doc, setDoc } from "firebase/firestore";
 
 function Payment() {
   const [{ cart, user }, dispatch] = useStateValue();
-const history=useHistory();
+  const history = useHistory();
 
   const [error, setError] = useState(null);
   const [disabled, setDisable] = useState(true);
@@ -19,16 +21,16 @@ const history=useHistory();
     //Generate the special secret which allows us to charge a customer
     const getClientSecret = async () => {
       const response = await axios({
-        method:'post',
+        method: "post",
         //Stripe expects the total in a currencies subunits
-        url:`/payments/create?total=${getCartTotal(cart)*100}`,
+        url: `/payments/create?total=${getCartTotal(cart) * 100}`,
       });
       setClientSecret(response.data.clientSecret);
     };
     getClientSecret();
   }, [cart]);
 
-  console.log("THE SECRET IS >>>",clientSecret)
+  console.log("THE SECRET IS >>>", clientSecret);
   const stripe = useStripe();
   const elements = useElements();
 
@@ -39,17 +41,53 @@ const history=useHistory();
     event.preventDefault();
     setProcessing(true);
 
-    const payload=await stripe.confirmCardPayment(clientSecret,{
-      payment_method:{
-      card:elements.getElement(CardElement),},
-    }).then(({PaymentIntent})=>{
-                  //paymentIntent =payment Confirmation
-                 setSucceeded(true);
-                 setError(null);
-                  setProcessing(false)
-                  history.replace('/orders')
-  });
-}
+    const payload = await stripe
+      .confirmCardPayment(clientSecret, {
+        payment_method: {
+          card: elements.getElement(CardElement),
+        },
+      })
+      .then(async (result) => {
+        const { paymentIntent, error } = result;
+
+        if (error) {
+          setError(error.message);
+          setProcessing(false);
+          setSucceeded(false);
+        } else {
+          if (paymentIntent && paymentIntent.id) {
+            try {
+              // Reference the Firestore collections and documents
+              const userRef = doc(db, "users", user?.uid);
+              const ordersCollectionRef = collection(userRef, "orders");
+
+              // Set the order data in Firestore
+              await setDoc(doc(ordersCollectionRef, paymentIntent.id), {
+                cart: cart,
+                amount: paymentIntent.amount,
+                created: paymentIntent.created,
+              });
+
+              setSucceeded(true);
+              setError(null);
+              setProcessing(false);
+              dispatch({
+                type: "EMPTY_CART",
+              });
+              history.replace("/orders");
+            } catch (error) {
+              setError("Error creating  order please try again ");
+              setProcessing(false);
+              setSucceeded(false);
+            }
+          } else {
+            setError("Payment confirmation failed. Please try again.");
+            setProcessing(false);
+            setSucceeded(false);
+          }
+        }
+      });
+  };
 
   const handleChange = (event) => {
     //Listen for changes in card Elements and display any error as the customer types their card details

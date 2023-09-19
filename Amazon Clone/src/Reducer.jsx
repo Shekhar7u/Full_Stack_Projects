@@ -13,6 +13,11 @@ const reducer = (state, action) => {
         ...state,
         cart: [...state.cart, action.item],
       };
+      case "EMPTY_CART":
+        return{
+          ...state,
+          cart:[]
+        }
     case "Remove_From_Cart":
       // eslint-disable-next-line no-case-declarations
       const index = state.cart.findIndex(
