@@ -4,6 +4,7 @@ const express = require("express");
 const cors = require("cors");
 
 
+// eslint-disable-next-line max-len
 const stripe = require("stripe")("sk_test_51NrSMmSEjwDG31nJlNnSORJZcns3v226WWsQZK5B7ZwfbhLeNhQnXQNDBqQMOfkFMn9iM6B3cYcWPdeI3LOGLF9X00P05deYMR");
 
 // API
@@ -12,7 +13,7 @@ const stripe = require("stripe")("sk_test_51NrSMmSEjwDG31nJlNnSORJZcns3v226WWsQZ
 const app = express();
 
 // - Middlewares
-app.use(cors({ origin: true }));
+app.use(cors({origin: true}));
 app.use(express.json());
 
 // - API routes

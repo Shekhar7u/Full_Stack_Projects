@@ -88,6 +88,7 @@ const history=useHistory();
           </div>
           <div className="payment_items">
             {cart.map((item) => (
+              // eslint-disable-next-line react/jsx-key
               <CheckoutProduct
                 id={item.id}
                 title={item.title}
