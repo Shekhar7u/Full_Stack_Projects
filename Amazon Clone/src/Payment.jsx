@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 import "./css/Payment.css";
 import { useStateValue } from "./StateProvider";
 import CheckoutProduct from "./CheckoutProduct";
 import { Link,useHistory } from "react-router-dom";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import axios from './Axios'
+import { getCartTotal } from "./Reducer";
 
 function Payment() {
   const [{ cart, user }, dispatch] = useStateValue();
@@ -20,13 +21,14 @@ const history=useHistory();
       const response = await axios({
         method:'post',
         //Stripe expects the total in a currencies subunits
-        url:'/payments/createTotal=${getCartTotal(cart)*100}',
-      })
-      setClientSecret(response.data.clientSecret)
-    }
+        url:`/payments/create?total=${getCartTotal(cart)*100}`,
+      });
+      setClientSecret(response.data.clientSecret);
+    };
     getClientSecret();
   }, [cart]);
 
+  console.log("THE SECRET IS >>>",clientSecret)
   const stripe = useStripe();
   const elements = useElements();
 
@@ -39,14 +41,15 @@ const history=useHistory();
 
     const payload=await stripe.confirmCardPayment(clientSecret,{
       payment_method:{
-      card:elements.getElement(CardElement)}
+      card:elements.getElement(CardElement),},
     }).then(({PaymentIntent})=>{
                   //paymentIntent =payment Confirmation
                  setSucceeded(true);
                  setError(null);
                   setProcessing(false)
-                  history.replaceState('/orders')
+                  history.replace('/orders')
   });
+}
 
   const handleChange = (event) => {
     //Listen for changes in card Elements and display any error as the customer types their card details

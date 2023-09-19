@@ -12,6 +12,7 @@
   "dependencies": {
     "@stripe/react-stripe-js": "^2.3.0",
     "@stripe/stripe-js": "^2.1.5",
+    "axios": "^1.5.0",
     "firebase": "^10.4.0",
     "link-react": "^3.0.0",
     "react-dom": "^18.2.0",
