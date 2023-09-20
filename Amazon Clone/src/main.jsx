@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import { StateProvider } from "./StateProvider.jsx";
 import reducer,{ initialState } from "./Reducer.jsx";
+
 // react context api
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
