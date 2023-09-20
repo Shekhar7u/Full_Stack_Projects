@@ -8,13 +8,12 @@ Currently, two official plugins are available:
 - [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
 Lets build the Clone of Amazon website with E-Commerce Functionality with React
-<li>
-  <ul>Acounts and Login Page</ul>
-  <ul>Products Page</ul>
-  <ul>Cart and Checkout Page</ul>
-  <ul>Real Payment</ul>
-  <ul>Order History Page</ul>
-</li>
+-  Acounts and Login Page
+ - Products Page
+ - Cart and Checkout Page
+ - Real Payment
+ - Order History Page
+
 
 We will also be using Firebase for Authentication, Database.
 
