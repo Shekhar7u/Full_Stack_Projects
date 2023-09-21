@@ -19,6 +19,13 @@ function Home() {
             image="https://m.media-amazon.com/images/I/51T-sMqSMiL._SY264_BO1,204,203,200_QL40_FMwebp_.jpg"
             rating={3}
           />
+          <Product
+            id="98468438768"
+            title="Itel P40+ (4GB RAM+128GB ROM, 8GB* RAM with Memory Fusion | 13MP AI Rear Camera | 7000mAh Battery with 18W Fast Charging | 6.8 IPS Punch Hole HD Diplay, Faceunlock "
+            price={29.99}
+            image="https://m.media-amazon.com/images/I/81XElaweeZL._SL1500_.jpg"
+            rating={3}
+          />
 
           <Product
             id="9853168"
@@ -60,6 +67,20 @@ function Home() {
             price={199.99}
             rating={5}
             image="https://m.media-amazon.com/images/I/51dtEUJ0gbL._AC_SY200_.jpg"
+          />
+          <Product
+            id="7963554986"
+            title="Tribit XSound Mega Bluetooth Portable Speaker with Single Self-Developed 30W N48 High-Density NdFeB & Titanium Driver,Exclusive XBass Tech,3 Audio Modes,LED Lights"
+            price={10000}
+            rating={5}
+            image="https://m.media-amazon.com/images/I/710hPEHdV-L._SL1500_.jpg"
+          />
+          <Product
+            id="7963586"
+            title="Fire-Boltt Ninja Call Pro Plus 1.83 Smart Watch with Bluetooth Calling, AI Voice Assistance, 100 Sports Modes IP67 Rating, 240 * 280 Pixel High Resolution"
+            price={1299}
+            rating={5}
+            image="https://m.media-amazon.com/images/I/61AHiYyu3ZL._AC_UL320_.jpg"
           />
         </div>
       </div>
